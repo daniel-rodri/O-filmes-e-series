@@ -1,7 +1,7 @@
 class Programa:
-    def __init__(self, nome, Ano):
+    def __init__(self, nome, ano):
         self._nome = nome.title()
-        self.Ano = Ano
+        self.ano = ano
         self._likes = 0
 
     @property
@@ -19,8 +19,8 @@ class Programa:
     def dar_likes(self):
         self._likes += 1
 
-    def imprime(self):
-        print(f'{self.nome} - {self.ano} - {self._likes} likes')
+    def __str__(self):
+     return f'{self.nome} - {self.ano} - {self._likes} likes'
 
 class Filme(Programa):
     def __init__(self, nome, ano, duracao):
@@ -34,15 +34,30 @@ class Serie(Programa):
         self.temporadas = temporadas
         self._likes = 0
 
-  
+class playlist(list):
+    def __init__(self,nome,programas):
+        self.nome = nome
+        super().__init__(programas)
+    
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
-vingadores.dar_likes()
-
 atlanta =Serie('atlanta', 2018, 2)
+tmep = Filme('todo mundo em panico',1999, 100)
+demolidor = Serie('demolidor',2016, 2)
+
+vingadores.dar_likes()
 atlanta.dar_likes()
 atlanta.dar_likes()
+tmep.dar_likes()
+tmep.dar_likes()
+tmep.dar_likes()
+tmep.dar_likes()
+demolidor.dar_likes()
+demolidor.dar_likes()
 
-filmes_e_series = [vingadores, atlanta]
+filmes_e_series = [vingadores, atlanta,demolidor,tmep]
+playlist_fim_de_semana = playlist('fim de semana',filmes_e_series)
 
-for programa in filmes_e_series:
-    programa.imprime()
+print(f'tamanho da playlist:{len(playlist_fim_de_semana)}')
+for programa in playlist_fim_de_semana:
+    print (programa)
+print(f'esta ou nao esta ?{demolidor in playlist_fim_de_semana}')
